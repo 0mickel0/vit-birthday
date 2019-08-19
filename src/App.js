@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { Component } from 'react';
+import Loader from './Loader';
 
 import gif from './assets/main2.gif';
 import hint from './assets/mouse-hint.png';
@@ -25,107 +26,191 @@ import vert5 from './assets/vert5.png';
 import tshirt from './assets/tshirt.jpg';
 import cup from './assets/cup.jpg';
 import trusi from './assets/trusi.jpg';
+import baloon from './assets/baloon.gif';
+import ramires from './assets/ramires.mp3';
+import baby from './assets/baby.gif';
 import './App.scss';
 
-function App() {
-  return (
-    <div className="App">
-      <div className="main-page">
-        <div className="task">
-          <div className="task-title">Логотип Виталику Рогалику</div>
-          <div className="task-description">Задача. Зашакалить логотип.</div>
-        </div>
-        <img src={gif} className="main-page__gif" alt="logo" />
-        <img src={hint} className="main-page__scroll-hint" alt="logo" />
-      </div>
-      <div className="description-page">
-        <img src={google1} className="full-width" alt="logo" />
+class App extends Component {
+  constructor(props) {
+    super(props);
 
-        <div className="block">
-          <img src={headToShakal} className="auto-width" alt="logo" />
-        </div>
+    this.state = {
+      isLoading: false
+    };
+  }
 
-        <div className="block">
-          <img src={shakalBorder} className="auto-width" alt="logo" />
-        </div>
+  audio = new Audio(ramires);
 
-        <div className="block">
-          <img src={vitalyaBorder} className="auto-width" alt="logo" />
-        </div>
+  componentDidMount() {
+    setTimeout(() => {
+      this.setState({ isLoading: true });
+      this.audio.play();
+    }, 4000);
+  }
 
-        <div className="block">
-          <img src={maskHead} className="auto-width" alt="logo" />
-        </div>
+  toggleMute = () => {
+    this.audio.paused ? this.audio.play() : this.audio.pause();
+  };
 
-        <div className="block">
-          <img src={vert1} className="threeToRow" alt="logo" />
-          <img src={vert2} className="threeToRow" alt="logo" />
-        </div>
+  render() {
+    const { isLoading } = this.state;
 
-        <div className="block">
-          <img src={vert3} className="auto-width" alt="logo" />
-          <img src={vert4} className="auto-width" alt="logo" />
-          <img src={vert5} className="auto-width" alt="logo" />
-        </div>
+    return (
+      <div className={`app-container ${isLoading && 'isLoading'}`}>
+        <Loader />
 
-        <img src={google2} className="full-width" alt="logo" />
-
-        <div className="block">
-          <img src={ctrlc} className="auto-width" alt="logo" />
-        </div>
-
-        <div className="block">
-          <img src={head1} className="threeToRow" alt="logo" />
-          <img src={head2} className="threeToRow" alt="logo" />
-          <img src={head3} className="threeToRow" alt="logo" />
-        </div>
-
-        <div className="block">
-          <img src={hui} className="auto-width" alt="logo" />
-        </div>
-
-        <div className="block">
-          <img src={rogalik} className="threeToRow" alt="logo" />
-          <img src={rogalicName} className="threeToRow" alt="logo" />
-          <img src={rogalikHead} className="threeToRow" alt="logo" />
-        </div>
-
-        <div className="block">
-          <img src={tshirt} className="threeToRow" alt="logo" />
-          <img src={trusi} className="threeToRow" alt="logo" />
-          <img src={cup} className="threeToRow" alt="logo" />
-        </div>
-
-        <div className="block">
-          <img src={logoFinal} className="oneToRow" alt="logo" />
-        </div>
-      </div>
-      <div className="made-by">
-        <div className="autors">
-          <div className="autors-block">
-            <div className="role">арт-директор</div>
-            <div className="naem">Артемий Лебедев</div>
+        <div className="App">
+          <img
+            src={baby}
+            className="baby"
+            alt="logo"
+            onClick={this.toggleMute}
+          />
+          <div className="main-page">
+            <div className="marquee">
+              <div className="marquee__inner">
+                <p className="marquee__line">
+                  Логотип Виталику Рогалику <br /> Задача. Зашакалить логотип.
+                </p>
+                <p className="marquee__line">
+                  Логотип Виталику Рогалику <br /> Задача. Зашакалить логотип.
+                </p>
+              </div>
+            </div>
+            <img src={gif} className="main-page__gif" alt="logo" />
+            <img src={hint} className="main-page__scroll-hint" alt="logo" />
           </div>
-          <div className="autors-block">
-            <div className="role">арт-директор</div>
-            <div className="naem">Артемий Лебедев</div>
+          <div className="description-page">
+            <img src={google1} className="full-width" alt="logo" />
+
+            <div className="block">
+              <img src={headToShakal} className="auto-width" alt="logo" />
+            </div>
+
+            <div className="block shake-animation-2">
+              <img src={shakalBorder} className="auto-width" alt="logo" />
+            </div>
+
+            <div className="block">
+              <img src={vitalyaBorder} className="auto-width" alt="logo" />
+            </div>
+
+            <div className="block glitch">
+              <img src={maskHead} className="auto-width" alt="logo" />
+            </div>
+
+            <div className="block">
+              <img src={vert1} className="threeToRow" alt="logo" />
+              <img
+                src={vert2}
+                className="threeToRow shake-animation-4"
+                alt="logo"
+              />
+            </div>
+
+            <div className="block">
+              <img
+                src={vert3}
+                className="auto-width shake-animation"
+                alt="logo"
+              />
+              <img src={vert4} className="auto-width" alt="logo" />
+              <img src={vert5} className="auto-width" alt="logo" />
+            </div>
+
+            <img src={google2} className="full-width" alt="logo" />
+
+            <div className="block">
+              <img src={ctrlc} className="auto-width" alt="logo" />
+            </div>
+
+            <div className="block">
+              <img src={head1} className="threeToRow" alt="logo" />
+              <img
+                src={head2}
+                className="threeToRow shake-animation-2"
+                alt="logo"
+              />
+              <img
+                src={head3}
+                className="threeToRow shake-animation"
+                alt="logo"
+              />
+            </div>
+
+            <div className="block">
+              <img src={hui} className="auto-width" alt="logo" />
+            </div>
+
+            <div className="block">
+              <img
+                src={rogalik}
+                className="threeToRow shake-animation"
+                alt="logo"
+              />
+              <img src={rogalicName} className="threeToRow" alt="logo" />
+              <img src={rogalikHead} className="threeToRow" alt="logo" />
+            </div>
+
+            <div className="block">
+              <img src={tshirt} className="threeToRow" alt="logo" />
+              <img src={trusi} className="threeToRow" alt="logo" />
+              <img src={cup} className="threeToRow" alt="logo" />
+            </div>
+
+            <div className="block shake-animation-3">
+              <img src={logoFinal} className="oneToRow" alt="logo" />
+            </div>
           </div>
-          <div className="autors-block">
-            <div className="role">арт-директор</div>
-            <div className="naem">Артемий Лебедев</div>
+          <div className="made-by">
+            <div className="autors">
+              <div className="autors-block">
+                <div className="role">Работа с графикой</div>
+                <div className="name">
+                  <img src={baloon} className="balloon" alt="logo" />
+                  <p data-text="Роман S Ворд" className="glitched-text">
+                    Роман S Ворд
+                  </p>
+                </div>
+              </div>
+              <div className="autors-block">
+                <div className="role">Арт-директор</div>
+                <div className="name">
+                  <img src={baloon} className="balloon" alt="logo" />
+                  <p data-text="Михаїл Назаров" className="glitched-text">
+                    Михаїл Назаров
+                  </p>
+                </div>
+              </div>
+              <div className="autors-block">
+                <div className="role">Руководитель студии</div>
+                <div className="name">
+                  <img src={baloon} className="balloon" alt="logo" />
+                  <p data-text="Ленид Rрош" className="glitched-text">
+                    Ленид Rрош
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className="date">
+              <div className="date-release">Дата выпуска: 21.08.2019</div>
+              <div
+                className="date-counter glitched-text"
+                data-text="Сделано за 1 день"
+              >
+                Сделано за 1 день
+              </div>
+            </div>
+          </div>
+          <div className="footer">
+            <div>© 2018–2019 Студия Тимы Хабибулина</div>
+            <div>mailbox@timaXabib.ru</div>
           </div>
         </div>
-        <div className="date">
-          <div className="date-release">Дата выпуска: 30.07.2019</div>
-          <div className="date-counter">Сделано за 1 день</div>
-        </div>
       </div>
-      <div className="footer">
-        <div>© 2018–2019 Студия Тимы Хабибулина</div>
-        <div>mailbox@timaXabib.ru</div>
-      </div>
-    </div>
-  );
+    );
+  }
 }
 
 export default App;
