@@ -11,7 +11,6 @@
 }
 
 .app-container {
-  height: 100vh;
   position: relative;
   overflow: hidden;
 }
@@ -31,10 +30,7 @@
 }
 
 .App {
-  position: absolute;
   z-index: 1;
-  top: 0;
-  left: 0;
   background: #111;
   background: linear-gradient(#0c141f 40%, #cf33d9 41%, #0c141f 60%);
 }
@@ -51,7 +47,7 @@
 
 .baby {
   position: fixed;
-  z-index: 10;
+  z-index: 1;
   bottom: 2%;
   left: 2%;
   cursor: pointer;
